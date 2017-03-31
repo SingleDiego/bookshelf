@@ -1,0 +1,16 @@
+{# 顶栏 #}
+<div class="ui tabular inverted blue menu" style="padding-right:23%; padding-left:23%">
+	<a class="item" href="#"><h4>主页</h4></a>
+	<a class="item" href={% url 'book_list' %} ><h4>书目统计</h4></a>
+	<a class="item" href={% url 'add_book' %} ><h4>添加书目</h4></a>
+	<a class="item" href="#"><h4>书目检索</h4></a>
+
+	<div class="right menu">
+		<div class="item">
+			<div class="ui  icon input">
+				<input type="text" placeholder="搜索...">
+				<i class="search link icon"></i>
+			</div>
+		</div>
+	</div>
+</div>

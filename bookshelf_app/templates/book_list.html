@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>书目列表</title>
+	<link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+</head>
+<body>
+	{# 顶栏 #}
+	{% include "top_bar.html" %}
+
+	<br><br>
+
+	{# 书目列表 #}
+	<div class="ui compact segment" style="width:50%; margin:0 auto">
+		<table class="ui table">
+			<thead>
+			    <tr>
+			    	<th>分类号</th>
+			      	<th>书名</th>
+				    <th>作者</th>
+				    <th>出版社</th>
+				    <th>出版日期</th>
+				    <th>册数</th>
+				    <th>详情</th>
+			    </tr>
+		  	</thead>
+
+		  	<tbody>
+		  		{% for book in book_list %}
+	  			<tr>
+	  				<td>{{ book.CLC }}</td>
+		  			<td>{{ book.title }}</td>
+		  			<td>{{ book.author }}</td>
+		  			<td>{{ book.publisher }}</td>
+		  			<td>{{ book.pub_date }}</td>
+					<td>{{ book.bookid_set.count }}</td>
+					<td><a href={% url 'book_detail' book.id %} >详情</a></td>
+		  		</tr>
+		  		{% endfor %}
+		  	</tbody>
+		</table>
+	</div>
+
+	
+	
+</body>
+</html>

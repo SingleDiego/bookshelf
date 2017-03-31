@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>添加书目</title>
+	<link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+</head>
+<body>
+	{% include "top_bar.html" %}
+
+	<br>
+
+	{# 添加书目表单 #}
+	<div class="ui compact segment" style="width:50%; margin:0 auto">
+		<form class="ui form" action={% url 'save_book' %} method="post">
+			{% csrf_token %}
+
+			<h2 class="ui dividing header">书目信息</h4>
+
+			<div class="field">
+				<label>书名（必填）：</label>
+				{{ book_form.title }}
+				{{ book_form.errors.title }}
+			</div>
+
+			<div class="three fields">
+				<div class="field">
+					<label>作者：</label>
+					{{ book_form.author }}
+				</div>
+
+				<div class="field">
+					<label>出版社：</label>
+					{{ book_form.publisher }}
+				</div>
+
+				<div class="field">
+					<label>出版日期（年份）：</label>
+					{{ book_form.pub_date }}
+					{{ book_form.errors.pub_date }}
+				</div>
+			</div>
+
+			<div class="three fields">
+				<div class="field">
+					<label>分类号：</label>
+					{{ book_form.CLC }}
+					{{ book_form.errors.CLC }}
+				</div>
+
+				<div class="field">
+					<label>ISBN：</label>
+					{{ book_form.ISBN }}
+				</div>
+
+				<div class="field">
+					<label>总册数（必填）：</label>
+					{{ book_form.amount }}
+					{{ book_form.errors.amount }}
+				</div>
+			</div>
+
+			{# 按钮 #}
+			<div class="" style="float:right ">
+				<button class="ui primary button" type="submit" style="">保存</button>
+				<a href="{% url 'add_book' %}" style="">
+					<button class="ui button" type="button" style="">取消</button>
+				</a>
+			</div>
+			
+		</form>
+	</div>
+
+	<br><br><br>
+
+	{# 最近添加书目列表 #}
+	<div class="ui compact segment" style="width:50%; margin:0 auto">
+		
+		<div class="ui tabular menu">
+			<h2 class="ui header">最近添加书目：<strong style='color: red'>{{ lately_books_count }}</strong></h2>
+			
+			<div class="right menu">
+				<a href={% url 'clean_books_count' %} >
+					<button class="ui primary button">清零</button>
+				</a>
+			</div>
+			
+		</div>
+
+		<table class="ui table">
+			<thead>
+			    <tr>
+			    	<th>分类号</th>
+			      	<th>书名</th>
+				    <th>作者</th>
+				    <th>出版社</th>
+				    <th>出版日期</th>
+			    </tr>
+		  	</thead>
+
+		  	<tbody>
+		  		{% for book in lately_books %}
+		  		<tr>
+		  			<td>{{ book.belong_to.CLC }}</td>
+		  			<td>{{ book.belong_to.title }}</td>
+		  			<td>{{ book.belong_to.author }}</td>
+		  			<td>{{ book.belong_to.publisher }}</td>
+		  			<td>{{ book.belong_to.pub_date }}</td>
+		  			<td><a href={% url 'book_detail' book.belong_to.id %}>详情</a></td>
+		  		</tr>
+		  		{% endfor %}
+		  	</tbody>
+
+
+		</table>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>{{ book_detail }}</title>
+	<link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+</head>
+
+<body>
+	{% include "top_bar.html" %}
+
+	<div class="ui compact segment" style="width:50%; margin:0 auto">
+		<form class="ui form">
+
+			<h2 class="ui dividing header">图书信息</h4>
+
+			<div class="field">
+				<label>书名：</label>
+				{{ book_form.title }}
+			</div>
+
+			<div class="three fields">
+				<div class="field">
+					<label>作者：</label>
+					{{ book_form.author }}
+				</div>
+
+				<div class="field">
+					<label>出版社：</label>
+					{{ book_form.publisher }}
+				</div>
+
+				<div class="field">
+					<label>出版日期（年份）：</label>
+					{{ book_form.pub_date }}
+				</div>
+			</div>
+
+			<div class="three fields">
+				<div class="field">
+					<label>分类号：</label>
+					{{ book_form.CLC }}
+				</div>
+
+				<div class="field">
+					<label>ISBN：</label>
+					{{ book_form.ISBN }}
+				</div>
+
+				<div class="field">
+					<label>总册数：</label>
+					{{ book_form.amount }}
+				</div>
+			</div>
+
+			{# 按钮 #}
+			<div class="" style="float:right ">
+				<button class="ui primary button" type="button" style="">编辑</button>
+				<a href="{% url 'book_list' %}" style="">
+					<button class="ui button" type="button" style="">取消</button>
+				</a>
+			</div>
+
+		</form>
+		
+	</div>
+
+
+
+</body>
+
+</html>
